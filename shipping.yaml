@@ -18,19 +18,14 @@
         path: /app
         state: directory
 
-    - name: Recursively remove app directory
-      ansible.builtin.file:
-        path: /app
-        state: absent    
-      
-
-    - name: download shoipping application
+    
+    - name: download shopping application
       ansible.builtin.get_url:
         url: https://roboshop-builds.s3.amazonaws.com/shipping.zip 
         dest: /tmp
 
     - name: extract shipping application
-      ansible.builtin.unarchieve: 
+      ansible.builtin.unarchive: 
         src: /tmp/catalogue.zip
         dest: /app
         remote_src: yes  

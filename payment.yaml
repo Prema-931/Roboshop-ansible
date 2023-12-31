@@ -33,7 +33,7 @@
       dest: /tmp
 
   - name: extract payment application
-    ansible.builtin.unarchieve: 
+    ansible.builtin.unarchive: 
       src: /tmp/payment.zip
       dest: /app
       remote_src: yes  

@@ -3,7 +3,7 @@
   become: yes  
   tasks:
   - name: disable old nodejs and enable nodejs:18
-    ansible.builtin.command: dnf module disable nodejs -y ;dnf module enable nodejs:18 -y
+    ansible.builtin.shell: dnf module disable nodejs -y ;dnf module enable nodejs:18 -y
 
   - name: Install nodejs
     ansible.builtin.package:
@@ -19,19 +19,14 @@
       path: /app
       state: directory
 
-  - name: Recursively remove app directory
-    ansible.builtin.file:
-      path: /app
-      state: absent    
-    
-
+  
   - name: download catalogue application
     ansible.builtin.get_url:
       url: https://roboshop-builds.s3.amazonaws.com/catalogue.zip 
       dest: /tmp
 
   - name: extract catalogue application
-    ansible.builtin.unarchieve: 
+    ansible.builtin.unarchive: 
       src: /tmp/catalogue.zip
       dest: /app
       remote_src: yes  
@@ -59,7 +54,7 @@
 
   - name: Install mongodb client
     ansible.builtin.package:
-      name: mongodb-org.shell   
+      name: mongodb-org-shell   
       state: present
 
   - name: get the categories count
