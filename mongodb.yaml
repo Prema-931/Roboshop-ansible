@@ -12,7 +12,7 @@
                 enabled=1
       dest: /etc/yum.repos.d/mongo.repo
   - name: install mongodb required version
-    dnf:
+    yum:
       name: mongodb-org
       state: present
   - name: enable and start mongodb
