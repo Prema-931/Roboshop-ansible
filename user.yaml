@@ -39,8 +39,8 @@
 
   - name: Copy user.service
     ansible.builtin.copy: 
-      src: catalogue.service
-      dest: /etc/systemd/system/catalogue.service
+      src: user.service
+      dest: /etc/systemd/system/user.service
 
 
   - name: daemon reload and start
