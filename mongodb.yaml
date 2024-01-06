@@ -1,32 +1,31 @@
-- name: MongoDB configuration
+- name: mongodb
   hosts: mongodb
-  become: true
+  become: yes
   tasks:
-  - name: create a file
-    copy:
-      content: |
-                [mongodb-org-4.2]
-                 name=MongoDB Repository
-                baseurl=https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/4.2/x86_64/
-                gpgcheck=0
-                enabled=1
-      dest: /etc/yum.repos.d/mongo.repo
-  - name: install mongodb required version
-    yum:
+  - name: Copy mongodb repo
+    ansible.builtin.copy:
+      src: mongodb.repo
+      dest: /etc/yum.repos.d/mongodb.repo
+  
+  - name: Install mongodb
+    ansible.builtin.package:
       name: mongodb-org
       state: present
-  - name: enable and start mongodb
-    service:
+
+  - name: start and enable mongodb
+    ansible.builtin.service:
       name: mongod
-      enabled: true
       state: started
-  - name : update 127.0.0.1 to 0.0.0.0
-    replace:
+      enabled: yes
+
+  - name: allow remote conncections
+    ansible.builtin.replace:
       path: /etc/mongod.conf
       regexp: '127.0.0.1'
       replace: '0.0.0.0'
-  - name : restart mongodb
-    service:
+
+  - name: start and enable mongodb
+    ansible.builtin.service:
       name: mongod
       state: restarted
 
