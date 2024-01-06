@@ -25,7 +25,7 @@
   - name: extract application
     ansible.builtin.unarchive: 
       src: /tmp/web.zip
-      dest: /usr/share/nginx/html
+      dest: /etc/usr/share/nginx/html
       remote_src: yes  
 
   - name: Copy roboshop configuration
