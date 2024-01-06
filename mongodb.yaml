@@ -12,6 +12,7 @@
                 enabled=1
       dest: /etc/yum.repos.d/mongo.repo
   - name: install mongodb required version
+    ansible.builtin.package:
     yum:
       name: mongodb-org
       state: present
