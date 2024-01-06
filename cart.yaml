@@ -38,7 +38,7 @@
 
   - name: Copy cart.service
     ansible.builtin.copy: 
-      src: catalogue.service
+      src: cart.service
       dest: /etc/systemd/system/cart.service 
 
   - name: start and enable cart
