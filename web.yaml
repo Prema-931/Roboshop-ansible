@@ -1,5 +1,5 @@
 - name: create a file
-    copy:
+  copy:
       content: |
                 [mongodb-org-4.2]
                  name=MongoDB Repository
@@ -7,21 +7,21 @@
                 gpgcheck=0
                 enabled=1
       dest: /etc/yum.repos.d/mongo.repo
-  - name: install mongodb required version
-    yum:
-      name: mongodb-org
-      state: present
-  - name: enable and start mongodb
-    service:
+- name: install mongodb required version
+  dnf:
+    name: mongodb-org
+    state: present
+- name: enable and start mongodb
+  service:
       name: mongod
       enabled: true
       state: started
-  - name : update 127.0.0.1 to 0.0.0.0
-    replace:
+- name : update 127.0.0.1 to 0.0.0.0
+  replace:
       path: /etc/mongod.conf
       regexp: '127.0.0.1'
       replace: '0.0.0.0'
-  - name : restart mongodb
-    service:
-      name: mongod
-      state: restarted
+- name : restart mongodb
+  service:
+    name: mongod
+    state: restarted
